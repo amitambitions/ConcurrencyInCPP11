@@ -27,9 +27,8 @@ class ThreadSafeQueue {
 	void pop(T& x) {
 		std::unique_lock<std::mutex> lock(m);
 		cond.wait(lock, [this]{return !queue.empty();});
-
 		x = queue.front();
-	    queue.pop();
+		queue.pop();
 	}
 
 private:
